@@ -1,0 +1,13 @@
+#
+#   DO NOT EDIT !!!
+#   Controlled by Puppet
+#
+
+<%  @ssh_conf_hash.each do |host, host_values| -%>
+Host <%= host %>
+  HostName      <%= host_values['hostname'] %>
+  User          <%= host_values['user'] %>
+  Port          <%= host_values['port'] %>
+  IdentityFile  <%= @root_dir -%>/.ssh/<%= host_values['key_name'] %>
+
+<% end -%>

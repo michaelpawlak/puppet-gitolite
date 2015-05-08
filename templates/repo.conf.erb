@@ -1,0 +1,23 @@
+#
+#   DO NOT EDIT !!!
+#   Controlled by Puppet
+#
+
+repo <%= @repo_name %>
+<%  @repo_hash.each do |repo_index, repo_values| -%>
+<%    if repo_index == 'acls' -%>
+<%      if repo_values.is_a?(Array) -%>
+<%        repo_values.each do |v| -%>
+  <%= v['perms'] -%> <%= v['refs'] -%> = <%= v['users'] %>
+<%        end -%>
+<%      end -%>
+<%    elsif repo_index == 'options' -%>
+<%      repo_values.each do |option_key, option_value| -%>
+  option  <%= option_key -%> = <%= option_value %>
+<%      end -%>
+<%    elsif repo_index == 'configs' -%>
+<%      repo_values.each do |config_key, config_value| -%>
+  config  <%= config_key -%> = <%= config_value %>
+<%      end -%>
+<%    end -%>
+<%  end %>
